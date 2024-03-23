@@ -1,0 +1,44 @@
+<div class="authentication-wrapper">
+
+    <div class="authentication-container">
+
+        {{!-- Intro Contents --}}
+        <section class="intro">
+            <h1>Login</h1>
+            {{!-- Error Handling, if there are error messages, display them to the user to let them know to try again. --}}
+            {{#if messages}}
+                <p>Please enter your username and password credentials.</p>
+                <p class="login-error">Invalid Login Credentials, please try again.</p>
+            {{!--  --}}
+            {{else}}
+                <p>Please enter your username and password credentials, or proceed with Google Sign-in.</p>
+            {{/if}}
+        </section>
+
+        {{!-- Start of Form Contents --}}
+        <form method="post" class="auth-form">
+
+            {{!-- Username Field --}}
+            <fieldset class="form-group">
+                <label for="username">Username <span class="highlight">*</span></label>
+                <input name="username" id="username" class="form-control" required maxlength="32" />
+            </fieldset>
+
+            {{!-- Password Field --}}
+            <fieldset class="form-group">
+                <label for="password">Password <span class="highlight">*</span></label>
+                <input name="password" id="password" class="form-control" required type="password" />
+            </fieldset>
+
+            {{!-- Login and Google Sign-in Buttons --}}
+            <div class="registration-btn-container">
+                <button class="btn auth-btn">Login</button>
+                <a href="/auth/google" class="btn auth-btn"><i class="bi bi-google me-2"></i> Google Sign-in</a>
+            </div>
+            
+        </form>
+        {{!-- End of Form Contents --}}
+
+    </div>
+
+</div>

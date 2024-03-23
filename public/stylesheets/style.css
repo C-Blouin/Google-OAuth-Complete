@@ -1,0 +1,603 @@
+  @charset "utf-8";
+
+  /* Font Imports for Raleway & Open Sans. */
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+  /* Root Variables to keep the application consistent. */
+  :root {
+      --google-yellow: #ffce44;
+      --google-red: #ea4335;
+      --slate-black: rgb(24, 24, 24);
+      --white: #fcfcfc;
+      --display: "Raleway", sans-serif;
+      --body-font: "Open Sans", sans-serif;
+      --font-xxs: 0.9rem;
+      --font-xs: 1.2rem;
+      --font-sm: 1.4rem;
+      --font-md: 1.6rem;
+      --font-lg: 1.8rem;
+      --font-xlg: 2rem;
+      --font-xxlg: 2.2rem;
+      --primary-heading: 4.8rem;
+      --sub-heading: 2.6rem;
+      --transition: all 0.3s ease-in-out;
+  }
+
+  /* Global Style Rules */
+
+  html,
+  *, 
+  ::after, ::before {
+      box-sizing: border-box;
+  }
+
+  *::before, *::after, * {
+      box-sizing: inherit;
+      margin: 0;
+      padding: 0;
+  }
+
+  html {
+      line-height: 1.6;
+      font-size: 100%;
+      color: var(--white);
+  }
+
+  *::selection {
+      background-color: var(--slate-black);
+      color: var(--white);
+  }
+  
+  /* Global heading styles. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    font-style: normal;
+    padding: 0;
+    margin: 0;
+    line-height: 1.2;
+    font-family: var(--display);
+  }
+  
+  /* Global paragraph styles. */
+  p {
+    font-family: var(--body-font);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    transition: var(--transition);
+  }
+  
+  /* Global anchor styles. */
+  a {
+    text-decoration: none;
+  }
+  
+  /* List item styles. */
+  ul, li {
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  /* Logo Styles */
+  .logo-wrapper {
+    transition: var(--transition);
+  }
+
+  .logo-wrapper:hover {
+    transform: rotate(360deg);
+  }
+  
+
+  /* Start of Navigation Styles. */
+
+  header {
+    width: 100%;
+    filter: none;
+    z-index: 99;
+    transition: var(--transition);
+    position: fixed;
+    background-color: transparent;
+  }
+  
+  /* Header navigation link styles. */
+  header .nav-link {
+    font-family: var(--display);
+    font-style: normal;
+    letter-spacing: 0.05rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--slate-black);
+    transition: var(--transition);
+  }
+  
+  header .nav-link:hover,
+  footer .nav-link:hover {
+    color: var(--google-red);
+  }
+
+  header .nav-link:active, header .nav-link:focus {
+    color: var(--google-yellow);
+  }
+  
+  nav ul li a:hover,
+  .navbar-dark .navbar-nav .nav-link.active {
+    color: var(--google-yellow);
+  }
+
+  /* Navbar container styles. */
+  .navbar {
+      background-color: transparent;
+      padding: 1rem 0;
+      /* Center the navigation contents. */
+      max-width: 1500px;
+      margin: 0 auto;
+  }
+  
+  /* Add spacing between each navbar item. */
+  .nav-item {
+      padding: 0 0.75rem;
+  }
+
+  @media screen and (max-width: 1200px){
+    /* On mobile, the toggle button will allow the canvas body that holds all the links to slide out and take up 70% of the viewport width. */
+    .offcanvas {
+      max-width: min(70vw, 500px)!important;
+    }
+  
+    div .offcanvas.offcanvas-end {
+      border-left: none;
+    }
+  }
+
+  /* Replace the toggle icon from Bootstrap with a custom hamburger icon. */
+  .navbar-toggler-icon {
+    background-image: url(../images/hamburger.svg);
+  }
+
+  /* Nav toggler styles. */
+  div .navbar-toggler {
+      outline: none;
+      font-size: 1.75rem;
+      border: none;
+      box-shadow: none;
+      padding: 0.5rem;
+      border-radius: 50%;
+  }
+  
+  /* Remove the default box shadow when the toggler button is in the focused state. */
+  div .navbar-toggler:focus {
+      box-shadow: none;
+  }
+  
+  /* Center the navbar element contents. */
+  .navbar > .container-fluid {
+    justify-content: center;
+  }
+  
+  /* Space the navigation contents. */
+  #navbarNav > div {
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 0.5rem 3rem;
+  }
+
+  .navbar-expand-xl .navbar-nav {
+    margin-top: 1rem;
+  }
+
+  nav .navbar-brand {
+    margin-right: 0;
+  }
+
+  /* Navigation Bar Media Query */
+  @media screen and (max-width: 1200px) {
+  
+      /* Center the navigation contents on smaller device widths. */
+      .navbar-nav {
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+      }
+  
+      /* Space the navigation contents. */
+      .navbar > .container-fluid {
+          justify-content: space-between;
+      }
+  
+      /* White space between each link. */
+      .nav-item {
+          margin: 1rem 0;
+      }
+  
+      .offcanvas-body {
+          background-color: var(--white);          
+      }
+
+      /* Stack the navigation link contents. */
+      #navbarNav > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        padding: 0.5rem 1rem;
+      }
+  }
+
+  /* End of Navigation Styles. */
+
+
+/* Global section styles, center section containers with margin auto. */
+section {
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+/* Landing Primary Section Styles. */
+#landing, 
+#authentication {
+    display: flex;
+    min-height: 100vh;
+    max-width: 100%;
+    background-color: var(--white);
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 15rem 0 8rem 0;
+}
+
+/* Primary section heading styles. */
+#landing > article h1,
+#authentication h1 {
+  color: var(--slate-black);
+  font-size: clamp(var(--sub-heading), 5vw, var(--primary-heading));
+  font-family: var(--display);
+  font-style: normal;
+  letter-spacing: 0.10rem;
+}
+
+/* Primary section paragraph styles. */
+#landing > article p,
+#authentication p {
+  max-width: 800px;
+  margin: 1rem 0;
+  line-height: 1.8;
+  hyphens: auto;
+  color: var(--slate-black);
+}
+
+/* Primary section button and anchor styles. */
+#landing > article a,
+#authentication > article a,
+.btn {
+  appearance: none;
+  display: inline-block;
+  color: var(--slate-black);
+  outline: 0.15rem solid var(--google-yellow);
+  text-decoration: none;
+  padding: 1rem 2rem;
+  letter-spacing: 0.1rem;
+  margin-top: 1rem;
+  font-size: var(--font-xs);
+  font-family: var(--display);
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  transition: var(--transition);
+  min-width: 180px;
+}
+
+/* Button & anchor hover styles. */
+#landing > article a:hover,
+#authentication > article a:hover,
+.btn:hover {
+    transform: translateY(0.3rem);
+}
+
+#landing > article a:hover,
+#authentication > article a:hover{
+  box-shadow: #0f0f0f 0.5rem 0.5rem;
+}
+
+/* The SVG images inside the links will transform and transition to the right when the buttons are hovered over. */
+.lucide-move-right {
+    transition: var(--transition);
+    margin-left: 0.5rem;
+}
+
+#landing > article a:hover .lucide-move-right,
+#authentication > article a:hover .lucide-move-right {
+  transform: translateX(0.5rem);
+  stroke: var(--slate-black);
+}
+
+@media screen and (max-width: 1200px) {
+
+  /* Reduce the padding on smaller screens. */
+  #landing,
+  #authentication {
+    text-align: center;
+    padding: 10rem 1rem 3rem 1rem;
+  }
+
+  /* Spacing on the top and bottom of the articles. */
+  #landing > article,
+  #authentication > article {
+    margin: 1.5rem auto;
+  }
+
+  @media screen and (max-width: 768px) {
+
+    /* Reduce paragraph font size on mobile screens. */
+    p {
+      font-size: 1.05em;
+    }
+
+    /* Reduce paragraph padding on smaller screens. */
+    #landing > article p,
+    #authentication > article p {
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }  
+
+  }
+
+}
+
+
+
+/* Start of Footer Styles. */
+
+/* Center all footer contents. */
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2rem 0;
+    background-color: var(--white);
+}
+
+/* The navigation children will sit side by each with flex direction row. */
+footer nav .navbar-nav {
+    padding: 2rem 0 0 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* Footer link styles. */
+footer .nav-link {
+  margin: 1rem;
+  font-family: var(--display);
+  font-size: var(--font-xs);
+  transition: var(--transition);
+  color: var(--slate-black);
+  font-weight: 500;
+}
+
+/* Footer styles for screen widths of 1200px wide. */
+@media screen and (max-width: 1200px) {
+
+  /* Stack the footer contents. */
+  footer {
+    flex-direction: column;
+    padding: 3rem 0;
+  }
+
+  /* Reduce padding to prevent overflow. */
+  footer .nav-link {
+    margin: 0 1rem;
+    padding: 0;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  /* Stack the footer children items on mobile devices. */
+  footer nav .navbar-nav {
+    flex-direction: column;
+  }
+  
+}
+
+/* End of Footer Styles. */
+
+
+/* Start of Authentication Styles. */
+
+.authentication-wrapper {
+  background-color: var(--white);
+}
+
+/* Center all contents inside the authentication container (register and login pages). */
+.authentication-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  max-width: 800px;
+  padding: 15rem 2rem 8rem 2rem;
+  margin: 0 auto;
+  color: var(--slate-black);
+}
+
+/* Intro content text alignment. */
+.intro {
+  text-align: center;
+}
+
+/* Error messages will appear in the google red. */
+.login-error,
+.highlight {
+  color: var(--google-red);
+}
+
+/* Intro heading color. */
+.intro h1 {
+  color: var(--slate-black);
+}
+
+/* Intro container paragraph styles. */
+.intro p {
+  max-width: 700px;
+  margin: 1rem auto;
+}
+
+.intro a {
+  padding: 0.75rem 1.5rem;
+}
+
+/* Authentication Form Styles. */
+.auth-form {
+  width: 680px;
+  margin: 1rem auto 0 auto;
+}
+
+/* Authentication button styles. */
+.auth-btn {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 0;
+}
+
+/* On smaller screens, apply the following styles. */
+@media screen and (max-width: 1200px) {
+
+  /* The form contents will take up the entire width of the screen, on mobile. */
+  .auth-form {
+    width: 100%;
+    margin: 1rem auto 0 auto;
+  }
+
+  /* Reduce the authentication container padding on smaller screens. */
+  .authentication-container {
+    padding: 15rem 2rem 8rem 2rem;
+  }
+
+  /* Reduce left and right padding on mobile screens. */
+  @media screen and (max-width: 768px) {
+
+    .authentication-container {
+      padding: 15rem 1rem 8rem 1rem;
+    }
+
+  }
+
+}
+
+/* Setting a position relative on the password container, to allow the show/hide icon the be positioned absolutely. */
+.password-container {
+  position: relative;
+}
+
+.show-hide-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Form group styles, top and bottom padding on the form inputs. */
+.form-group {
+  padding: 0.75rem 0;
+}
+
+/* Push the inputs downwards under the form labels. */
+.form-group label {
+  margin-bottom: 0.5rem;
+}
+
+/* Overwriting bootstrap form styles of the form-control class. */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: var(--slate-black);
+  background-color: #f1f1f1;
+  background-clip: padding-box;
+  border-radius: 0.25rem;
+  border: none;
+  outline: none;
+  letter-spacing: 0.05rem;
+  font-weight: 500;
+  border: 2px solid var(--light-white);
+}
+
+/* When an input with the form-control class is focused, change the background color to signify that it's the active field to enter information. */
+.form-control:focus {
+  color: var(--slate-black);
+  background-color: #e6e6e6;
+  outline: 0;
+  transition: var(--transition);
+  box-shadow: none;
+}
+
+/* Registration button styles. */
+.registration-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 2rem;
+}
+
+/* On screen widths of 768px, apply the following styles to the registration buttons. */
+@media screen and (max-width: 768px) {
+
+  /* Stack the registration buttons (children) by apply a flex direction column to the parent. */
+  .registration-btn-container {
+    flex-direction: column;
+    gap: 2rem;
+    margin: 3rem auto 0 auto;
+  }
+
+  /* Button spacing and font sizing on smaller screens. */
+  .auth-btn {
+    margin: 0 auto;
+    padding: 0.75rem 0rem;
+    font-size: var(--font-xs);
+  }
+
+  /* Set a fixed button width on mobile. */
+  .registration-btn-container > a,
+  .registration-btn-container > button {
+    width: 250px;
+  }
+  
+}
+
+/* Pushing the password error message down by applying a margin bottom to the last form input on the registration and login. */
+.auth-form > fieldset:last-of-type > input {
+  margin-bottom: 1rem;
+}

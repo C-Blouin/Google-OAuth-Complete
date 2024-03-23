@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{!-- Injecting the Title variable for the correspoding view. --}}
+    <title>{{title}}</title> 
+    <!-- Normalize the CSS before applying BootStrap & Custom Styles. -->
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <!-- Importing Bootstrap & Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <!-- Applying Custom Styles. -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    {{!-- Linking BootStrap JS --}}
+    <script src="/javascripts/bootstrap.min.js" defer></script>
+    {{!-- Linking Custom JS --}}
+    <script src="/javascripts/script.js" defer></script>
+  </head>
+  <body>
+    <!-- Start of Header Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-xl navbar-light justify-content-between align-items-center" role="navigation" data-bs-theme="light">
+            <div class="container-fluid">
+                <!-- Bootstrap Hamburger Button Toggler -->
+                <button class="navbar-toggler d-xl-none" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle Navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" id="navbarNav"> 
+                    <div class="offcanvas-body">                       
+                        <a href="/" class="logo-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+                                <path fill="#fbc02d" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12	s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20	s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#e53935" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039	l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4caf50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36	c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1565c0" d="M43.611,20.083L43.595,20L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571	c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                            </svg>
+                        </a>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/">Home</a>
+                            </li>                
+                            {{!-- IF a user is logged in, display the following username and logout links. --}}
+                            {{#if user}}
+
+                                {{!-- STEP: 10B (Final Step!). Uncomment the list items in the header and footer to reveal the displayName tied to the google account you signed into. --}}
+
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="/authenticated">Authenticated</a>
+                                </li>
+
+                                {{!-- Check if the user is a local user or a google user. Display the username of the corresponding user type. --}}
+                                {{#if user.username}}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">{{user.username}}</a>
+                                    </li>
+                                {{else}}
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">{{user.displayName}}</a>
+                                    </li>
+
+                                    {{!-- 
+                                    
+                                    STEP10 NOTE:
+
+                                    You may notice our disaplyName doesn’t have our googleUser object attached. This is because Passport.js by default removes the specific user type, being local or a Google user, and provides use a consistent way to retrieve the user by using req.user in our routes.
+                                    
+                                     --}}
+
+                                {{/if}}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/auth/logout">Logout</a>
+                                </li>
+                                {{!-- ELSE, show the users the register and login links. --}}
+                                {{else}}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/auth/registration">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/auth/login">Login</a>
+                                </li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                    <!-- End of .offcanvas-body -->
+                </div> 
+                <!-- End of .offcanvas -->
+            </div>
+            <!-- End of .container-fluid -->
+        </nav>
+        <!-- End of Primary Header Navigation -->
+    </header>
+    <!-- End of Header -->
+    <main>
+      {{{body}}}
+    </main>
+    <!-- Start of Footer -->
+    <footer>
+        <div class="footer-container">
+            <a href="/" class="logo-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+                    <path fill="#fbc02d" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12	s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20	s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#e53935" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039	l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4caf50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36	c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1565c0" d="M43.611,20.083L43.595,20L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571	c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                </svg>
+            </a>
+            <nav>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                   
+                    {{#if user}}
+
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/authenticated">Authenticated</a>
+                        </li>
+                        {{!-- Check if the user is a local user or a google user. Display the username of the corresponding user type. --}}
+                        {{#if user.username}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{{user.username}}</a>
+                            </li>
+                        {{else}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{{user.displayName}}</a>
+                            </li>
+                        {{/if}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/logout">Logout</a>
+                        </li>
+                        {{!-- ELSE, display the register and login links as there is no session. --}}
+                        {{else}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/registration">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/login">Login</a>
+                        </li>
+                    {{/if}}                
+                </ul>
+            </nav>
+        </div>        
+    </footer>
+    <!-- End of Footer -->
+  </body>
+</html>

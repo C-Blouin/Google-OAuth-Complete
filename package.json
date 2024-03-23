@@ -1,0 +1,27 @@
+{
+  "name": "buglore",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "express": "~4.16.1",
+    "express-session": "^1.18.0",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "icons": "^1.0.0",
+    "mongoose": "^8.2.1",
+    "morgan": "~1.9.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^8.0.0"
+  }
+}

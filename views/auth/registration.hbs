@@ -1,0 +1,48 @@
+<div class="authentication-wrapper">
+
+    <div class="authentication-container">
+
+        {{!-- Intro Contents --}}
+        <section class="intro">
+            <h1>Registration</h1>            
+            <p>If you are registering for a local account, passwords must be a minimum of 8 characters, 1 digit, 1 uppercase letter and 1 lowercase letter. Or register with Google Sign-in!</p>
+        </section>
+
+        {{!-- Start of Form Contents --}}
+        <form method="post" class="auth-form">
+
+            {{!-- Username Field --}}
+            <fieldset class="form-group">
+                <label for="username">Username <span class="highlight">*</span></label>
+                <input name="username" id="username" class="form-control" required />
+            </fieldset>
+
+            {{!-- Password Field --}}
+            <fieldset class="form-group">
+                <label for="password">Password <span class="highlight">*</span></label>
+                <div class="password-container">
+                    <input name="password" id="password" class="form-control" required type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+                    <img src="/images/show.svg" alt="Show/Hide" id="imgShowHide" onclick="showHide();" class="show-hide-btn" />
+                </div>
+            </fieldset>
+                
+            {{!-- Confirm Password Field --}}
+            <fieldset class="form-group">
+                <label for="confirm">Confirm Password <span class="highlight">*</span></label>
+                <input name="confirm" id="confirm" class="form-control" required type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeyup="return checkPassword();" />
+                <span id="pwMsg"></span>
+            </fieldset>
+
+            {{!-- Register and Login Buttons --}}
+            <div class="registration-btn-container">
+                {{!-- Returning the checkPassword function to verify if the two password fields match. --}}
+                <button class="btn auth-btn" onclick="return checkPassword();">Register</button>
+                <a href="/auth/google" class="btn auth-btn"><i class="bi bi-google me-2"></i> Google Sign-in</a>
+            </div>  
+                     
+        </form>
+        {{!-- End of Form Contents --}}
+
+    </div>
+
+</div>
