@@ -83,28 +83,25 @@ router.get('/unauthorized', (req, res) => {
     });
 });
 
-/* STEP 8A: Define the GET routes for Google Sign-In authentication, which will bring users to the Google Sign-In process. Remember when we set up our API Credentials, we checked off the profile and email in the scope, here we can pass our user's values to the route.
-
-- Structure the route.
-
-*/
 
 // GET: /auth/google => initiate Google Sign-In authentication
+
+// STEP 8A: We will now define the GET routes for Google Sign-In authentication, which will be used to initiate the Google Sign-In process. Remember when we set up our API Credentials, we checked off the profile and email in the scope, here we can pass our user's values to the route.
 router.get('/google',  passport.authenticate('google', { 
     // STEP 8B: Define the scope of the Google Sign-In, which will be used to retrieve the user's profile and email.
     scope: ['profile', 'email']
 }));
 
-// STEP 9A: Define the GET route for the Google Sign-In callback. This route will be used to handle the callback from Google Sign-In, which will be used to authenticate the user and log them into the application.
-
 // GET: /auth/google/callback => handle Google Sign-In callback
+
+// STEP 9A: Define the GET route for the Google Sign-In callback. This route will be used to handle the callback from Google Sign-In, which will be used to authenticate the user and log them into the application.
 router.get('/google/callback', passport.authenticate('google', { 
     successRedirect: '/',
     failureRedirect: '/auth/login'
 }));
 
 
-// STEP 10A: Test our application to see if we can now log in without issues! We will notice an issue for regarding usability in our application, let's go into the Layout file and look over our navigation bar.
+// STEP 10A: Test our application to see if we can now log in without issues!
 
 // Exporting the auth router to be used in the app.js file.
 module.exports = router;
