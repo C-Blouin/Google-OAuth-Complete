@@ -19,7 +19,7 @@ let session = require('express-session');
 
 
 let User = require('./models/user');
-// // STEP 2A: Import the Google User Model. We will be focusing on Google User's, and to implement Google Authentication, we will pass this model into a Google Strategy for Passport to use when authenticating users.
+// STEP 2A: Import the Google User Model. We must import the model as we will be referencing the user data in our Passport Google Authentication Strategy.
 const GoogleUser = require('./models/googleUser');
 
 // Load environment variables from the .env file.
@@ -65,28 +65,28 @@ passport.use(User.createStrategy());
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
-// STEP 3B: Configure the Google Strategy for Passport to use when authenticating users.
+// STEP 3B: We now want to let Passport know that we must use the Google Strategy when authenticating users.
 passport.use(new GoogleStrategy({
 
-  // STEP 3C and 3D: Define the Google Strategy options. Including the Client ID, Client Secret, and Callback URL. And then assigning values to the options, we will set the ClientID and Secret from the environment variables for security purposes. And then define the Callback URL for the Google authentication routing.
+  // STEP 3C and 3D: And now we need to define the options for our strategy. Including the Client ID, Client Secret, and Callback URL. And then assigning values to the options. We will set the ClientID and Secret from the environment variables for security purposes. And then define the Callback URL for the Google authentication routing.
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: "http://localhost:3000/auth/google/callback",
   passReqToCallback: true
-  // STEP 3E: Define the asynchronous function to be executed when a user is authenticated. Passing the request, access token, refresh token, profile, and done callback to the function.
+  // STEP 3E: Write an asynchronous function that will execute when a user is attempting to authenticate. We will pass the request, access token, refresh token, profile, and done callback arguments to the function.
 }, async (request, accessToken, refreshToken, profile, done) => {
-  // STEP 4A: Structure a try/catch block, so we can add authentication logic to the Google Strategy, and prevent the application from crashing if errors occur.
+  // STEP 4A: Structure a try/catch block, so we can add authentication logic, which will prevent the application from crashing if errors occur.
   try {
-    // STEP 4B: Declare a variable to store the Google User, and we will search for any existing user's in our googleUser model database documents by their Google ID.
+    // STEP 4B: Declare a variable to store the Google User, and we will search for any existing users in our database filtering by their Google ID.
     let googleUser = await GoogleUser.findOne({ googleId: profile.id });
-    // STEP 4C: Write a conditional statement to check if a googleUser is present in the database, if not, we will create a new Google User and store their Google ID and Display Name.
+    // STEP 4C: Now we must write a conditional statement to check IF a googleUser exists in the database. If there is no user, we will create a new Google User and store their Google ID and Display Name.
     if (!googleUser) {
       googleUser = await GoogleUser.create({
         googleId: profile.id,
         displayName: profile.displayName
       });
     }
-    // STEP 4D: IF a user exists, return the Google User to the done callback, as a user now exists in the database, which we can now use when serializing and deserializing users into a session.
+    // STEP 4D: IF a user exists, we will return the Google User to the done callback, as a user now exists in the database.
     done(null, googleUser);
   } 
   catch (error) {
@@ -96,7 +96,7 @@ passport.use(new GoogleStrategy({
 }));
 
 
-// STEP 5A: We must now serialize the user into a session by storing their ID in the session.
+// STEP 5A: Serialize the user into a session by storing their ID in the session.
 
 // STEP 5B: Pass the user object and the done callback to the serializeUser method.
 passport.serializeUser((user, done) => {
@@ -104,15 +104,15 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// STEP 6A: Create the skeleton code for the deserializeUser method, which will be used to retrieve the user from the session.
+// STEP 6A: Create a method to deserialize the user, which will be used to retrieve the user from the session.
 
 // STEP 6B: Pass the ID and done callback to the deserializeUser method.
 passport.deserializeUser(async (id, done) => {
 
-  // STEP 6C: Structure a try/catch block to handle the deserialization of the user.
+  // STEP 6C: Structure a try-and-catch block to handle the deserializing users.
   try {
 
-      // STEP 6D: Search for any existing user's in our local user model database documents by their ID.
+      // STEP 6D: Search for any existing user's in our local user database, by searching for their ID.
       let user = await User.findById(id);
     
       // STEP 6E: Check IF a user is present in the database, if there is a user, we will return it.
@@ -120,7 +120,7 @@ passport.deserializeUser(async (id, done) => {
           done(null, user);
       }
     
-      // STEP 6F: IF no local user is found, we will search for a Google user by their ID in the Google User model and return the Google user. IF a google user is not found, we will return null.
+      // STEP 6F: And IF no local user is found, we will search for a Google user by their ID, referencing the googleUser model. If a Google user is not found, we will return null.
       else {
           let googleUser = await GoogleUser.findById(id);
           done(null, googleUser || null);

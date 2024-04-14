@@ -86,16 +86,17 @@ router.get('/unauthorized', (req, res) => {
 
 // GET: /auth/google => initiate Google Sign-In authentication
 
-// STEP 8A: We will now define the GET routes for Google Sign-In authentication, which will be used to initiate the Google Sign-In process. Remember when we set up our API Credentials, we checked off the profile and email in the scope, here we can pass our user's values to the route.
+// STEP 8A: Structure the route for Google Authentication, which will be used to initiate the Google Sign-In process.
 router.get('/google',  passport.authenticate('google', { 
-    // STEP 8B: Define the scope of the Google Sign-In, which will be used to retrieve the user's profile and email.
+    // STEP 8B: Define the scope options, which will be used to retrieve the Google user's profile and email.
     scope: ['profile', 'email']
 }));
 
 // GET: /auth/google/callback => handle Google Sign-In callback
 
-// STEP 9A: Define the GET route for the Google Sign-In callback. This route will be used to handle the callback from Google Sign-In, which will be used to authenticate the user and log them into the application.
+// STEP 9A: Structure the route for the Google Sign-In Callback. This route will be used to authenticate the user and log them into the application.
 router.get('/google/callback', passport.authenticate('google', { 
+    // STEP 9B: Define the success and failure redirect routes for the Google Sign-In Callback.
     successRedirect: '/',
     failureRedirect: '/auth/login'
 }));
